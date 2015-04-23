@@ -44,4 +44,12 @@ angular.module('starterApp', [ 'ngMaterial', 'ngMessages' ])
     });
   })
 
+  .run(function ($http) {
+
+    var encoded = btoa('4b9194d8-6a1b-4c97-a826-713b6534c841:92c42da4-aac3-4e51-9bf5-783881344557');
+    $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+
+  })
+
+
 ;
