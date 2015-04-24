@@ -131,6 +131,8 @@ angular.module('starterApp')
             var newContact = response.data;
 
             contacts.push(newContact);
+
+            MixpanelService.track('create', newContact);
             return self.selectContact(newContact, ctrl);
 
           } else {
@@ -138,6 +140,8 @@ angular.module('starterApp')
             var originalContact = _.find(contacts, { id: copyContact.id });
 
             new CopyService().from(updatedContact).to(originalContact).copy();
+
+            MixpanelService.track('update', updatedContact);
           }
 
         })
@@ -149,7 +153,6 @@ angular.module('starterApp')
             NotificationsService.addInfo(copyContact.firstName + ' successfully updated!');
           }
 
-          MixpanelService.track('save', copyContact);
         })
         .finally(function () {
           ctrl.isAsyncInProgress = false;
