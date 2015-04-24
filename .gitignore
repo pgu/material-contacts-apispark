@@ -5,7 +5,6 @@ tmp
 .DS_Store
 .idea
 app/jspm_packages
-mixpanel.properties
 
 app/bower_components/material-design-icons/*
 !app/bower_components/material-design-icons/content/
