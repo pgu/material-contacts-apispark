@@ -37,4 +37,4 @@
     e.parentNode.insertBefore(a, e)
   }
 })(document, window.mixpanel || []);
-mixpanel.init("2272d3f92a207931857868f63c04c9b1", { debug: true });
+mixpanel.init("2272d3f92a207931857868f63c04c9b1");
