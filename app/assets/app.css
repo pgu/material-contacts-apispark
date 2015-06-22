@@ -40,10 +40,6 @@ md-sidenav md-list {
 /* Primary content area */
 
 #content {
-  overflow: hidden;
-}
-
-#content {
   padding-left: 40px;
   padding-right: 40px;
   padding-top: 5px;
@@ -157,13 +153,4 @@ span.name {
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
-}
-
-.md-toolbar-tools .fill-height {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
