@@ -56,10 +56,6 @@ md-sidenav md-list {
   right: 25px;
 }
 
-#content md-icon.avatar {
-  margin-top: 10px;
-}
-
 #content .md-button.delete-contact > md-icon {
   width: 36px;
   height: 36px;
@@ -95,22 +91,6 @@ md-button.menuBtn > md-icon {
 md-toolbar h1 {
   font-size: 1.250em;
   font-weight: 400;
-}
-
-.avatar-without-wrap {
-  position: relative;
-  width: 128px;
-  height: 128px;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  display: inline-block;
-  overflow: hidden !important;
-  margin: 0;
-  vertical-align: middle;
-  zoom: 0.70;
-  transform: translateZ(0);
-  -webkit-transform: scale(0.70);
-  -moz-transform: scale(0.70);
 }
 
 .avatar {
