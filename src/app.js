@@ -13,7 +13,7 @@ angular.module('starterApp', [ 'ngMaterial', 'ngMessages' ])
     ;
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('deep-purple')
+      .primaryPalette('blue')
       .accentPalette('pink');
 
   })
