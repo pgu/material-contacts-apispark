@@ -7,7 +7,8 @@ angular.module('starterApp')
       track: function (key, data) {
 
         if (_.has($window, 'mixpanel')) {
-          $window.mixpanel.track(key, data);
+          var copy = _.cloneDeep(data);
+          $window.mixpanel.track(key, copy); // use a copy to avoid that mixpanel adds attributes like 'token' to data.
         }
 
       }
