@@ -22,9 +22,9 @@ public class WebApiApplication extends Application {
     public Restlet createInboundRoot() {
         Router router = new Router(getContext());
         router.attach("/companies", CompanyListServerResource.class);
-        router.attach("/companies/{companyid}", CompanyServerResource.class);
+        router.attach("/companies/{companyId}", CompanyServerResource.class);
         router.attach("/contacts", ContactListServerResource.class);
-        router.attach("/contacts/{contactid}", ContactServerResource.class);
+        router.attach("/contacts/{contactId}", ContactServerResource.class);
         return router;
     }
 
