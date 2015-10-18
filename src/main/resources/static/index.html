@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <title>Contacts Material with APISpark</title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+  <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
+  <link rel="stylesheet" href="assets/app.css"/>
+
+</head>
+<body ng-app="starterApp" layout="column" ng-controller="AppCtrl">
+
+<div ng-controller="ContactsCtrl as cc" layout="column" style="height: 100%;" ng-cloak>
+
+  <md-toolbar layout="row" class="md-toolbar-tools">
+
+    <md-button class="menu" hide-gt-sm ng-click="cc.toggleListPanel()" aria-label="Show Contacts List">
+      <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+
+    <div layout="row" flex class="fill-height">
+      <h2 class="md-toolbar-item md-breadcrumb md-headline">
+        Contacts
+        <a target="_blank" href="http://restlet.com/products/apispark/">
+          <img src="./assets/apispark_logo.png"
+               style="width: 130px; vertical-align: middle; margin-top: -6px;"/>
+        </a>
+      </h2>
+
+      <span flex></span>
+
+      <div class="md-toolbar-item">
+        <a class="md-icon-button md-button"
+           aria-label="View source on GitHub"
+           target="_blank"
+           href="https://github.com/pgu/material-contacts-apispark">
+          <md-icon md-svg-src="./assets/svg/github.svg"
+                   style="color: rgba(255,255,255,0.97);"></md-icon>
+        </a>
+      </div>
+
+    </div>
+  </md-toolbar>
+
+  <div flex layout="row">
+
+    <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left">
+      <md-list>
+
+        <md-item>
+          <md-button ng-click="cc.addContact(cc)"
+                     class="md-primary"
+                     ng-disabled="cc.isAsyncInProgress">
+            <div class="wrap-avatar">
+              <md-icon md-svg-icon="add-contact" class="avatar"></md-icon>
+            </div>
+            <span>New contact</span>
+          </md-button>
+        </md-item>
+
+        <md-item ng-repeat="contact in cc.contacts">
+          <md-button ng-click="cc.selectContact(contact, cc)"
+                     ng-class="{'md-accent' : contact.id === cc.copyContact.id }"
+                     ng-disabled="cc.isAsyncInProgress">
+
+            <div class="wrap-avatar">
+              <md-icon md-svg-icon="{{ contact.avatar }}" class="avatar"></md-icon>
+            </div>
+            <span>{{ contact.firstName }} {{ contact.lastName }}</span>
+
+          </md-button>
+        </md-item>
+      </md-list>
+    </md-sidenav>
+
+    <md-content flex id="content" md-scroll-y>
+
+      <div class="wrap-avatar">
+        <md-icon md-svg-icon="{{cc.copyContact.avatar}}" class="avatar"></md-icon>
+      </div>
+
+      <form name="contactForm"
+            ng-if="cc.copyContact"
+            ng-disabled="cc.isAsyncInProgress"
+            novalidate>
+
+        <md-input-container>
+          <label>First Name</label>
+          <input name="firstName"
+                 ng-model="cc.copyContact.firstName"
+                 required>
+
+          <div ng-messages="contactForm.firstName.$error" ng-show="contactForm.firstName.$dirty">
+            <div ng-message="required">This is required!</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Last Name</label>
+          <input name="lastName"
+                 ng-model="cc.copyContact.lastName"
+                 required>
+
+          <div ng-messages="contactForm.lastName.$error" ng-show="contactForm.lastName.$dirty">
+            <div ng-message="required">This is required!</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Avatar</label>
+          <!--no ng-disabled on md-select for now, see: https://github.com/angular/material/pull/1871-->
+          <md-select ng-model="cc.copyContact.avatar"
+                   ng-disabled="cc.isAsyncInProgress">
+            <md-option ng-value="avatar.value"
+                     ng-repeat="avatar in cc.avatars">
+              {{ avatar.label }}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+        <section layout="row" layout-align="left center" style="margin-top: 40px;">
+
+          <md-button class="md-fab md-primary" aria-label="Save contact"
+                     style="margin-right: 10px;"
+                     ng-disabled="contactForm.$invalid || cc.isAsyncInProgress"
+                     ng-click="cc.saveContact(cc.copyContact, cc.contacts, cc)">
+            <md-icon md-svg-src="save"></md-icon>
+          </md-button>
+
+          <md-button class="md-fab md-hue-2 md-primary" aria-label="Undo changes"
+                     ng-if="cc.copyContact.id"
+                     ng-disabled="cc.isAsyncInProgress"
+                     ng-click="cc.resetContact(cc.copyContact, cc.contacts)">
+            <md-icon md-svg-src="undo"></md-icon>
+          </md-button>
+
+        </section>
+
+      </form>
+
+      <md-button class="delete-contact md-warn md-hue-1" md-no-ink
+                 ng-if="cc.copyContact.id"
+                 ng-disabled="cc.isAsyncInProgress"
+                 ng-click="cc.deleteContact(cc.copyContact, cc.contacts, cc)"
+                 aria-label="Delete contact">
+        <md-icon md-svg-icon="delete-contact"></md-icon>
+      </md-button>
+
+    </md-content>
+
+  </div>
+
+  <div style="position: fixed; bottom: 0;height: 90px; width: 100%; z-index: 60;"
+       ng-if="cc.isAsyncInProgress">
+    <md-progress-circular md-mode="indeterminate"
+                          style="margin: 0 auto;"></md-progress-circular>
+  </div>
+
+</div>
+
+<script src="./bower_components/lodash/lodash.min.js"></script>
+
+<script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/angular-messages/angular-messages.js"></script>
+<script src="./bower_components/angular-animate/angular-animate.js"></script>
+<script src="./bower_components/angular-aria/angular-aria.js"></script>
+<script src="./bower_components/angular-material/angular-material.js"></script>
+
+<script src="./src/app.js"></script>
+
+<script src="./src/app/NotificationsService.js"></script>
+<script src="./src/app/AppCtrl.js"></script>
+
+<script src="./src/contacts/ContactsService.js"></script>
+<script src="./src/contacts/ContactsCtrl.js"></script>
+
+<script src="./src/ext/ga.js"></script>
+
+</body>
+</html>
