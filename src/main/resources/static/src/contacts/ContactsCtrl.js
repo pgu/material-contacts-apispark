@@ -81,7 +81,7 @@ angular.module('starterApp')
       ctrl.copyContact = {
         firstName: '',
         lastName: '',
-        avatar: _.first(self.avatars).value
+        avatar: ''
       };
 
       $mdSidenav('left').close();
