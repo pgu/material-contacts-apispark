@@ -11,8 +11,10 @@ import java.util.List;
 public class Company implements Serializable {
 
     private String id;
+    private String name;
+    private List<String> tags;
+    private Address address;
 
-    
     public String getId() {
         return id;
     }
@@ -20,9 +22,6 @@ public class Company implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
-
-    private String name;
 
 
     @JsonProperty(required = true)
@@ -35,10 +34,6 @@ public class Company implements Serializable {
     }
 
 
-    private List<String> tags;
-
-    
-    
     public List<String> getTags() {
         if (tags == null) {
             tags = new ArrayList<String>();
@@ -50,10 +45,6 @@ public class Company implements Serializable {
         this.tags = tags;
     }
 
-
-    private Address address;
-
-    
     public Address getAddress() {
         return address;
     }

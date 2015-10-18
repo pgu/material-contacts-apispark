@@ -10,8 +10,22 @@ import java.util.Date;
 public class Contact implements Serializable {
 
     private String id;
+    private String firstName;
+    private String lastName;
+    private String avatar;
+    private Boolean active;
+    private Integer rank;
+    private String companyId;
 
-    
+    public Contact(){}
+
+    public Contact(String id, String firstName, String lastName, String avatar) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.avatar = avatar;
+    }
+
     public String getId() {
         return id;
     }
@@ -19,10 +33,6 @@ public class Contact implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-
-
-    private String firstName;
-
 
     @JsonProperty(required = true)
     public String getFirstName() {
@@ -33,10 +43,6 @@ public class Contact implements Serializable {
         this.firstName = firstName;
     }
 
-
-    private String lastName;
-
-
     @JsonProperty(required = true)
     public String getLastName() {
         return lastName;
@@ -45,10 +51,6 @@ public class Contact implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-
-    private String avatar;
-
 
     public String getAvatar() {
         return avatar;
@@ -70,10 +72,6 @@ public class Contact implements Serializable {
         this.birthday = birthday;
     }
 
-
-    private Boolean active;
-
-    
     public Boolean getActive() {
         return active;
     }
@@ -83,9 +81,6 @@ public class Contact implements Serializable {
     }
 
 
-    private Integer rank;
-
-    
     public Integer getRank() {
         return rank;
     }
@@ -94,8 +89,6 @@ public class Contact implements Serializable {
         this.rank = rank;
     }
 
-
-    private String companyId;
 
     public String getCompanyId() {
         return companyId;
