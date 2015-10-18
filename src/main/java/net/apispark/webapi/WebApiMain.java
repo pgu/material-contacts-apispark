@@ -7,9 +7,15 @@ import org.restlet.data.LocalReference;
 import org.restlet.data.Protocol;
 import org.restlet.engine.Engine;
 import org.restlet.resource.Directory;
+import org.restlet.routing.Redirector;
+import org.restlet.routing.Template;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
 public class WebApiMain {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebApiMain.class);
 
     public static void main(String[] args) throws Exception {
         configureLog();
@@ -24,12 +30,20 @@ public class WebApiMain {
         // attach REST API to /api
         c.getDefaultHost().attach("/api", new WebApiApplication());
 
+        // redirect / to /index.html
+        c.getDefaultHost().attach(
+                "/",
+                new Redirector(c.getContext().createChildContext(), "/index.html", Redirector.MODE_CLIENT_PERMANENT),
+                Template.MODE_EQUALS);
         // other routes are redirected to static resources
         c.getDefaultHost().attachDefault(
                 new Directory(c.getContext().createChildContext(), LocalReference.createClapReference("/static")));
 
         // start server
         c.start();
+
+        LOGGER.info("Server started on http://localhost:8000/");
+
     }
 
     private static void configureLog() {
