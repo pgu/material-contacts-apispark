@@ -3,6 +3,7 @@ package net.apispark.webapi.representation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.apispark.webapi.core.validation.ValidationErrors;
+import net.apispark.webapi.representation.enums.Gender;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,6 +14,7 @@ public class Contact implements Serializable {
     private String firstName;
     private String lastName;
     private String avatar;
+    private Date birthday;
     private Boolean active;
     private Integer rank;
     private String companyId;
@@ -59,9 +61,6 @@ public class Contact implements Serializable {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-
-    private Date birthday;
-
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     public Date getBirthday() {
