@@ -29,6 +29,8 @@ angular.module('starterApp')
       { label: 'Cat', value: 'svg-11' }
     ];
 
+    $scope.formContainer = {}; // because the form is not automatically attached to the $scope
+
     function fetchContacts (ctrl) {
 
       ctrl.isAsyncInProgress = true;
@@ -78,13 +80,19 @@ angular.module('starterApp')
 
     };
 
-    self.addContact = function (ctrl) {
+    self.addContact = function (ctrl, form) {
 
       ctrl.copyContact = {
         firstName: '',
         lastName: '',
         avatar: _.first(self.avatars).value
       };
+
+      form.firstName.$validate();
+      form.lastName.$validate();
+      
+      form.$setPristine();
+      form.$setUntouched();
 
       $mdSidenav('left').close();
     };
