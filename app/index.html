@@ -86,13 +86,13 @@
 
       <form name="contactForm"
             ng-if="cc.copyContact"
-            ng-disabled="cc.isAsyncInProgress"
             novalidate>
 
         <md-input-container>
           <label>First Name</label>
           <input name="firstName"
                  ng-model="cc.copyContact.firstName"
+                 ng-disabled="cc.isAsyncInProgress"
                  required>
 
           <div ng-messages="contactForm.firstName.$error" ng-show="contactForm.firstName.$dirty">
@@ -104,6 +104,7 @@
           <label>Last Name</label>
           <input name="lastName"
                  ng-model="cc.copyContact.lastName"
+                 ng-disabled="cc.isAsyncInProgress"
                  required>
 
           <div ng-messages="contactForm.lastName.$error" ng-show="contactForm.lastName.$dirty">
@@ -111,14 +112,17 @@
           </div>
         </md-input-container>
 
-        <!--no ng-disabled on md-select for now, see: https://github.com/angular/material/pull/1871-->
-        <md-select ng-model="cc.copyContact.avatar" placeholder="Select an avatar"
-                   ng-disabled="cc.isAsyncInProgress">
-          <md-option ng-value="avatar.value"
-                     ng-repeat="avatar in cc.avatars">
-            {{ avatar.label }}
-          </md-option>
-        </md-select>
+        <md-input-container>
+          <label>Avatar</label>
+
+          <md-select ng-model="cc.copyContact.avatar" placeholder="Select an avatar"
+                     ng-disabled="cc.isAsyncInProgress">
+            <md-option ng-value="avatar.value"
+                       ng-repeat="avatar in cc.avatars">
+              {{ avatar.label }}
+            </md-option>
+          </md-select>
+        </md-input-container>
 
         <section layout="row" layout-align="left center" style="margin-top: 40px;">
 
