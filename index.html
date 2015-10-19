@@ -53,7 +53,7 @@
       <md-list>
 
         <md-item>
-          <md-button ng-click="cc.addContact(cc)"
+          <md-button ng-click="cc.addContact(cc, formContainer.contactForm)"
                      class="md-primary"
                      ng-disabled="cc.isAsyncInProgress">
             <div class="wrap-avatar">
@@ -84,7 +84,7 @@
         <md-icon md-svg-icon="{{cc.copyContact.avatar}}" class="avatar"></md-icon>
       </div>
 
-      <form name="contactForm"
+      <form name="formContainer.contactForm"
             ng-if="cc.copyContact"
             novalidate>
 
@@ -95,7 +95,7 @@
                  ng-disabled="cc.isAsyncInProgress"
                  required>
 
-          <div ng-messages="contactForm.firstName.$error" ng-show="contactForm.firstName.$dirty">
+          <div ng-messages="formContainer.contactForm.firstName.$error" ng-show="formContainer.contactForm.firstName.$dirty">
             <div ng-message="required">This is required!</div>
           </div>
         </md-input-container>
@@ -107,7 +107,7 @@
                  ng-disabled="cc.isAsyncInProgress"
                  required>
 
-          <div ng-messages="contactForm.lastName.$error" ng-show="contactForm.lastName.$dirty">
+          <div ng-messages="formContainer.contactForm.lastName.$error" ng-show="formContainer.contactForm.lastName.$dirty">
             <div ng-message="required">This is required!</div>
           </div>
         </md-input-container>
@@ -128,7 +128,7 @@
 
           <md-button class="md-fab md-primary" aria-label="Save contact"
                      style="margin-right: 10px;"
-                     ng-disabled="contactForm.$invalid || cc.isAsyncInProgress"
+                     ng-disabled="formContainer.contactForm.$invalid || cc.isAsyncInProgress"
                      ng-click="cc.saveContact(cc.copyContact, cc.contacts, cc)">
             <md-icon md-svg-src="save"></md-icon>
           </md-button>
